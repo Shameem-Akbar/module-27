@@ -17,9 +17,9 @@ document.getElementById('button-submit').addEventListener('click',function(){
     // DANGER: DO NOT VERIFY EMAIL PASSWORD on the client site
     //Step - 4: verify email and password and check whether valid user or not
     if (email === 'shameem@gmail.com' && password === 'secret'){
-        console.log('valid user');
+        window.location.href = 'bank.html'
     }
     else{
-        console.log('invalid user');
+        alert('Thik password de kana');
     }
 })
