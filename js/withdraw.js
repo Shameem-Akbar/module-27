@@ -12,35 +12,44 @@
 */
 
 //step-1
-document.getElementById('button-withdraw').addEventListener('click',function(){
-//step-2:
-const withdrawField = document.getElementById('withdraw-field');
-//get the input value as string
-const newWithdrawAmountString = withdrawField.value;
-//convert the string to number. Else it won't work.
-const newWithdrawAmount = parseFloat(newWithdrawAmountString);
+document.getElementById('button-withdraw').addEventListener('click', function () {
+    //step-2:
+    const withdrawField = document.getElementById('withdraw-field');
+    //get the input value as string
+    const newWithdrawAmountString = withdrawField.value;
+    //convert the string to number. Else it won't work.
+    const newWithdrawAmount = parseFloat(newWithdrawAmountString);
 
-//step-3: get the current withdraw total amount
-const withdrawTotalElement = document.getElementById('withdraw-total');
-const previousWithdrawTotalString = withdrawTotalElement.innerText;
-const previousWithdrawTotal = parseFloat(previousWithdrawTotalString);
+    //step-7: Clear the withdraw field
+    withdrawField.value = '';
 
-//step - 4: Add numbers to save the total withdraw
-const currentWithdrawTotal = previousWithdrawTotal + newWithdrawAmount;
-//set the withdraw total
-withdrawTotalElement.innerText = currentWithdrawTotal;
+    if (isNaN(newWithdrawAmount) || newWithdrawAmount < 0) {
+        alert('Please Provide a Valid Number')
+        return;
+    }
 
-//step-5: get balance current total
-const balanceTotalElement = document.getElementById('balance-total');
-const previousBalanceTotalString = balanceTotalElement.innerText;
-const previousBalanceTotal = parseFloat(previousBalanceTotalString);
+    //step-3: get the current withdraw total amount
+    const withdrawTotalElement = document.getElementById('withdraw-total');
+    const previousWithdrawTotalString = withdrawTotalElement.innerText;
+    const previousWithdrawTotal = parseFloat(previousWithdrawTotalString);
 
- //step-6: calculate current total balance
- const currentBalanceTotal = previousBalanceTotal - newWithdrawAmount;
- // set the balance total
- balanceTotalElement.innerText = currentBalanceTotal;
+    //step-5: get balance current total
+    const balanceTotalElement = document.getElementById('balance-total');
+    const previousBalanceTotalString = balanceTotalElement.innerText;
+    const previousBalanceTotal = parseFloat(previousBalanceTotalString);
 
-//step-7: Clear the withdraw field
-withdrawField.value = '';
+    if (newWithdrawAmount > previousBalanceTotal) {
+        alert('Tor Bank E Eto Taka Nai! Shala Gorib!');
+        return;
+    }
 
+    //step - 4: Add numbers to save the total withdraw
+    const currentWithdrawTotal = previousWithdrawTotal + newWithdrawAmount;
+    //set the withdraw total
+    withdrawTotalElement.innerText = currentWithdrawTotal;
+
+    //step-6: calculate current total balance
+    const currentBalanceTotal = previousBalanceTotal - newWithdrawAmount;
+    // set the balance total
+    balanceTotalElement.innerText = currentBalanceTotal;
 })
